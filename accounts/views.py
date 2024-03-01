@@ -12,6 +12,7 @@ def login_page(request):
         user = authenticate(request = request, email = email, password = password)
         if user is not None:
             login(request = request, user = user)
+            return redirect ('dashboard:dashboard_page')
         else:
-            return redirect('accounts: login_page')
+            return redirect('accounts:login_page')
     return render(request,"accounts/login.html")
