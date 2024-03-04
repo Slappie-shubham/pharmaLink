@@ -24,12 +24,15 @@ def login_page(request):
 
 def register_page(request):
     context = {}
+    if request.user.is_authenticated:
+        return redirect('dashboard:dashboard_page')
+    
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit = False)
             user.is_customer=True
-            user.username = 'test'
+            user.username = form.cleaned_data.get('first_name')
             user.save()
             return redirect('accounts:login_page')
         print(form.errors, ".............")
