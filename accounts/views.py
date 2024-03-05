@@ -32,9 +32,10 @@ def register_page(request):
         if form.is_valid():
             user = form.save(commit = False)
             user.is_customer=True
-            user.username = form.cleaned_data.get('first_name')
+            user.username = form.cleaned_data.get('email')
             user.save()
-            return redirect('accounts:login_page')
+            messages.success(request, "Sucessfully registered")
+            #return redirect('accounts:login_page')
         print(form.errors, ".............")
     else:
         form = UserRegisterForm()
