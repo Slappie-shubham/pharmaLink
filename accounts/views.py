@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from accounts.forms import UserRegisterForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from accounts.forms import CustomPasswordChangeForm
 
 
 # Create your views here.
@@ -49,6 +50,30 @@ def register_page(request):
 def logout_process(request):
     logout(request)
     return redirect('accounts:login_page')
+
+@login_required(login_url= '/')
+def change_password(request):
+    if request.method == "POST":
+        form = CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('dashboard:dashboard_page')
+    else:
+        form = CustomPasswordChangeForm(request.user)
+    return render(request, "accounts/change_password.html", {"form" : form})
+
+
+
+
+
+
+        
+
+
+
+
+
 
 
     
