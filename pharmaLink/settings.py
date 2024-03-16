@@ -142,5 +142,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'pharmalink893@gmail.com'
 EMAIL_HOST_PASSWORD = 'xibb mygp lzbu cojx'
+DEFAULT_FROM_EMAIL = 'pharmalink893@gmail.com'
 
 
