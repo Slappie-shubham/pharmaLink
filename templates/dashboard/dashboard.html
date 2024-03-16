@@ -1,17 +1,194 @@
 {% extends "partials/layout.html" %}
-        
+
 {% block Navbar %}
 {% include "partials/navbar.html" %}
 {% endblock Navbar %}
-        
+
 {% block sidebar %}
 {% include "partials/sidebar.html" %}
 {% endblock sidebar %}
-                
+
 {% block content %}
-<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error odit recusandae repellat accusantium voluptatibus ad quae est soluta deleniti. Perspiciatis cumque explicabo porro vel voluptate magnam animi adipisci provident facere?</p>
-{% endblock content %}    
-            
+<div class="row mt-2">
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>150</h3>
+
+
+                <p>Total medicine</p>
+            </div>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>53</h3>
+
+
+                <p>Total Users</p>
+            </div>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>44</h3>
+
+
+                <p>User Docters</p>
+            </div>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>65</h3>
+
+
+                <p>Total reports</p>
+            </div>
+        </div>
+    </div>
+    <!-- ./col -->
+</div>
+
+
+
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">MEDICINE LIST</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">S.N</th>
+                        <th>Medicine Name</th>
+                        <th>Catgory</th>
+                        <th>Total Quantity</th>
+                        <th>Price per Unit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1.</td>
+                        <td><a href="#">paracitamol</a></td>
+                        <td>
+                            medicine
+                        </td>
+                        <td>15248</td>
+                        <td>RS 1500/-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">DOCTER LIST</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">S.N</th>
+                        <th>Docter Name</th>
+                        <th>Department</th>
+                        <th>contant number</th>
+                        <th>email</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1.</td>
+                        <td><a href="#">Ram Kumar yadav</a></td>
+                        <td>general opd</td>
+                        <td>984785642310</td>
+                        <td>ramkumaryadav@gmail.com</td>
+                        <td>Kathmandu - Nepal </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">PATIENT LIST</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">S.N</th>
+                        <th>Patient Name</th>
+                        <th>Constult Docter</th>
+                        <th>contant number</th>
+                        <th>email</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1.</td>
+                        <td><a href="#">Ram Kumar yadav</a></td>
+                        <td>general opd</td>
+                        <td>984785642310</td>
+                        <td>ramkumaryadav@gmail.com</td>
+                        <td>Kathmandu - Nepal </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">REPORT LIST</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">S.N</th>
+                        <th>Patient Name</th>
+                        <th>Constult Docter</th>
+                        <th>Consult Date</th>
+                        <th>Report</th>
+                        <th>Generated by</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1.</td>
+                        <td><a href="#">Ram Kumar yadav</a></td>
+                        <td><a href="#">Hari Kumar yadav</a></td>
+                        <td>2024/22/22</td>
+                        <td><a href="#">report.pdf</a></td>
+                        <td>Hari Kumar</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
 {% block script %}
 {% include "partials/script.html" %}
 {% endblock script %}
