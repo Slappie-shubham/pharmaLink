@@ -9,6 +9,7 @@
 {% endblock sidebar %}
 
 {% block content %}
+{% if request.user.is_superuser %}
 <h1 class="m-2 text-mute">DashBoard</h1>
 <div class="row mt-2">
   
@@ -25,6 +26,7 @@
             <div class="icon"> <i class="ion ion-bag"></i> </div>
         </div>
     </div>
+    
     <!-- ./col -->
     <div class="col-lg-6">
         <!-- small box -->
@@ -91,28 +93,38 @@
                     <tr>
                         <th style="width: 10px">S.N</th>
                         <th>Medicine Name</th>
-                        <th>Catgory</th>
-                        <th>Total Quantity</th>
-                        <th>Price per Unit</th>
+                        <th>generic name</th>
+                        <th>dosage strength</th>
+                        <th>dose form</th>
+                        <th>manufacture name</th>
+                        <th>manufacture date</th>
+                        <th>expiry date</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
+                    {% for i in medicine  %}
                     <tr>
-                        <td>1.</td>
-                        <td><a href="#">paracitamol</a></td>
+                        <td>{{forloop.counter}}</td>
+                        <td><a href="#">{{i.name}}</a></td>
                         <td>
-                            medicine
+                            {{i.generic_name}}
                         </td>
-                        <td>15248</td>
-                        <td>RS 1500/-</td>
+                        <td>{{i.dosage_strength}}</td>
+                        <td>{{i.dose_form}}</td>
+                        <td>{{i.manufacture_name}}</td>
+                        <td>{{i.manufacture_date}}</td>
+                        <td>{{i.expiry_date}}</td>
+                        
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-
+{% endif %}
 {% endblock content %}
 
 {% block script %}
