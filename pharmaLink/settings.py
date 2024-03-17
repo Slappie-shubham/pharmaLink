@@ -32,6 +32,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    "crispy_forms",
+    "crispy_bootstrap4",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'dashboard',
     'widget_tweaks',
+    
 ]
 
 MIDDLEWARE = [
@@ -130,6 +133,9 @@ STATICFILES_DIRS = [
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -143,5 +149,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'pharmalink893@gmail.com'
 EMAIL_HOST_PASSWORD = 'xibb mygp lzbu cojx'
 DEFAULT_FROM_EMAIL = 'pharmalink893@gmail.com'
+
+
 
 
