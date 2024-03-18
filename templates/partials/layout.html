@@ -34,18 +34,26 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-
         
 
         <!-- Navbar -->
         {% block Navbar %}{% endblock Navbar %}
         <!-- /.navbar -->
         
+        
         <!-- Main Sidebar Container -->
         {% block sidebar %}{% endblock sidebar %}
                 <!-- main containent here  -->
         <div class="content-wrapper">      
             <section class = "content">
+            
+        {% if messages %}
+        {% for message in messages  %}
+        <div class="alert alert-info text-center" role="alert">
+            {{message}}
+          </div>
+        {% endfor %}
+        {% endif %}
                 {% block content %}{% endblock content %}    
             </section>
         </div>
