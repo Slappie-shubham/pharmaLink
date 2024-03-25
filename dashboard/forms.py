@@ -7,6 +7,11 @@ class EmployeeRegisterForm(UserCreationForm):
         model = User
         fields = ('email', 'first_name', 'last_name', 'address', 'phone', 'dob', 'password1', 'password2')
 
+class EmployeeUpdateForm(forms.ModelForm):    
+    class Meta:
+        model = User
+        fields = ('email', 'first_name', 'last_name', 'address', 'phone', 'dob')
+
 
 
 
