@@ -5,4 +5,5 @@ app_name = 'dashboard'
 urlpatterns = [
     path('dashboard/', dashboard.dashboard_page, name="dashboard_page"),
     path('addemployee/', dashboard.add_employee, name="add_employee"),
+    path('employees/', dashboard.list_employee, name="list_employee"),
 ]

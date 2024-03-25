@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from dashboard.models import Medicine
 from dashboard.forms import EmployeeRegisterForm
 from django.contrib import messages
+from accounts.models import User
 
 # Create your views here.
 @login_required(login_url='/')
@@ -27,6 +28,15 @@ def add_employee(request):
     else:
         form = EmployeeRegisterForm()
     return render(request, 'dashboard/employee/add.html', {'form': form})
+
+@login_required(login_url='/')
+def list_employee(request):
+    employee = User.objects.filter(is_employee=True)
+    context = {
+        'employees' : employee
+    }
+    return render(request, "dashboard/employee/list.html", context)
+
 
 
 
