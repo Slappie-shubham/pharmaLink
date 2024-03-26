@@ -13,10 +13,10 @@ class EmployeeUpdateForm(forms.ModelForm):
         model = User
         fields = ('email', 'first_name', 'last_name', 'address', 'phone', 'dob')
 
-# class MedicineUpdateForm(forms.ModelForm):    
-#     class Meta:
-#         model = Medicine
-#         fields = ('email', 'first_name', 'last_name', 'address', 'phone', 'dob')
+class MedicineUpdateForm(forms.ModelForm):    
+    class Meta:
+        model = Medicine
+        fields = ('name', 'generic_name', 'dosage_strength', 'dose_form', 'manufacture_name', 'manufacture_date', 'stock', 'batch', 'expiry_date','extra_detail')
 
 
 

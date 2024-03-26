@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from dashboard.models import Medicine
-from dashboard.forms import EmployeeRegisterForm, EmployeeUpdateForm
+from dashboard.forms import EmployeeRegisterForm, EmployeeUpdateForm, MedicineUpdateForm
 from django.contrib import messages
 from accounts.models import User
+
 
 
 # Create your views here.
@@ -77,5 +78,18 @@ def delete_medicine(request, id):
     return redirect("dashboard:medicine_list_admin")
 
 
+@login_required(login_url='/')
+def update_medicine(request, id):
 
+    medicine = Medicine.objects.filter(id=id).first()
+    if request.method == "POST":
+        form = MedicineUpdateForm(request.POST, instance=medicine)
+        if form.is_valid():
+            medicine = form.save(commit=False)
+            medicine.save()
+            messages.success(request, "Successfully Updated Medicine")
+            return redirect("dashboard:medicine_list_admin")
+    else:
+        form = MedicineUpdateForm(instance=medicine)
+    return render(request, "dashboard/medicine/update.html", {'form': form})
 
