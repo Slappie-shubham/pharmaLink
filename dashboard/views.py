@@ -65,6 +65,17 @@ def update_employee(request, id):
     return render(request, "dashboard/employee/update.html", {'form': form})
 
 
+@login_required(login_url='/')
+def medicine_list_admin(request):
+    medicine = Medicine.objects.all()
+    return render(request, "dashboard/medicine/list.html", {"medicine" : medicine})
+
+@login_required(login_url='/')
+def delete_medicine(request, id):
+    medicine = Medicine.objects.filter(id=id).first()
+    medicine.delete()
+    return redirect("dashboard:medicine_list_admin")
+
 
 
 
