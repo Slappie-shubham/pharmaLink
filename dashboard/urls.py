@@ -11,4 +11,5 @@ urlpatterns = [
     path('medicine/', dashboard.medicine_list_admin, name="medicine_list_admin"),
     path('medicine/delete/<int:id>', dashboard.delete_medicine, name="delete_medicine"),
     path('medicine/update/<int:id>', dashboard.update_medicine, name="update_medicine"),
+    path('medicine/add/', dashboard.add_medicine, name="add_medicine"),
 ]

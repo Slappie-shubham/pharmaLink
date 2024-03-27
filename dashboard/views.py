@@ -93,3 +93,15 @@ def update_medicine(request, id):
         form = MedicineUpdateForm(instance=medicine)
     return render(request, "dashboard/medicine/update.html", {'form': form})
 
+@login_required(login_url='/')
+def add_medicine(request):
+    if request.method == "POST":
+        form = MedicineUpdateForm(request.POST)
+        if form.is_valid():
+            medicine = form.save(commit=False)
+            medicine.save()
+            messages.success(request, "Successfully Added Medicine")
+            return redirect("dashboard:medicine_list_admin")
+    else:
+        form = MedicineUpdateForm()
+    return render(request, 'dashboard/medicine/add.html', {'form': form})
