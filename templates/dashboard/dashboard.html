@@ -14,71 +14,88 @@
 <div class="row mt-2">
   
     <!-- ./col -->
-    <div class="col-lg-6">
+    <div class="col-lg-3">
         <!-- small box -->
         <div class="small-box bg-info">
-            <div class="inner pt-5 pb-5">
+            <div class="inner ">
                 <h3>53</h3>
 
 
-                <h2>Invoice</h2>
+                <h2>Total Customer</h2>
             </div>
-            <div class="icon"> <i class="ion ion-bag"></i> </div>
+            <div class="icon"> <i class="fas fa-user"></i> </div>
         </div>
     </div>
     
     <!-- ./col -->
-    <div class="col-lg-6">
+    <div class="col-lg-3">
         <!-- small box -->
         <div class="small-box bg-info">
-            <div class="inner pt-5 pb-5">
+            <div class="inner">
                 <h3>44</h3>
 
 
-                <h2>Invoice</h2>
+                <h2>Total Medicine</h2>
             </div>
-            <div class="icon"> <i class="ion ion-bag"></i> </div>
+            <div class="icon"> <i class="fas fa-tablets"></i> </div>
         </div>
     </div>
     <!-- ./col -->
-    <div class="col-lg-6">
+    <div class="col-lg-3">
         <!-- small box -->
         <div class="small-box bg-info">
-            <div class="inner pt-5 pb-5">
+            <div class="inner">
                 <h3>65</h3>
 
 
-                <h2>Invoice</h2>
+                <h2>Expired Medicine</h2>
             </div>
-            <div class="icon"> <i class="ion ion-bag"></i> </div>
+            <div class="icon"> <i class="fas fa-tablets"></i> </div>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-3">
         <!-- small box -->
         <div class="small-box bg-info">
-            <div class="inner pt-5 pb-5">
+            <div class="inner">
                 <h3>65</h3>
 
 
-                <h2>Invoice</h2>
+                <h2>Total Invoice</h2>
             </div>
-            <div class="icon"> <i class="ion ion-bag"></i> </div>
+            <div class="icon"> <i class="fas fa-dollar-sign"></i> </div>
         </div>
     </div>
     <!-- ./col -->
 </div>
 
-<div class="row">
-    <div class="col-6">
+<div class="row" >
+    <div class="col-9" >
         <div>
             <canvas id="myChart"></canvas>
         </div>
     </div>
-    <div class="col-6">
-        <div>
-            <canvas id="myCharttwo"></canvas>
+    
+    <div class="col-lg-3">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                   <h2>Total Sales</h2>
+            </div>           
+        </div><div class="small-box bg-info">
+            <div class="inner">
+                   <h2>Total Sales</h2>
+            </div>           
+        </div><div class="small-box bg-info">
+            <div class="inner">
+                   <h2>Total Sales</h2>
+            </div>           
+        </div><div class="small-box bg-info">
+            <div class="inner">
+                   <h2>Total Sales</h2>
+            </div>           
         </div>
     </div>
+    
  </div>
 
 <div class="col-12">
@@ -150,26 +167,6 @@
      }
    });
  </script>
- <script>
-   const ctxy = document.getElementById('myCharttwo');
-    new Chart(ctxy, {
-     type: 'bar',
-     data: {
-       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-       datasets: [{
-         label: '# of Votes',
-         data: [12, 19, 3, 5, 2, 3],
-         borderWidth: 1
-       }]
-     },
-     options: {
-       scales: {
-         y: {
-           beginAtZero: true
-         }
-       }
-     }
-   });
- </script>
+
 {% include "partials/script.html" %}
 {% endblock script %}
