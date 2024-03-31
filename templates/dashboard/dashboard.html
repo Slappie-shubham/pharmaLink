@@ -12,13 +12,13 @@
 {% if request.user.is_superuser %}
 <h1 class="m-2 text-mute">DashBoard</h1>
 <div class="row mt-2">
-  
+
     <!-- ./col -->
     <div class="col-lg-3">
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner ">
-                <h3>53</h3>
+                <h3>{{users_count}}</h3>
 
 
                 <h2>Total Customer</h2>
@@ -32,27 +32,26 @@
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
-                <h3>44</h3>
+                <h3>{{medicine_count}}</h3>
 
 
                 <h2>Total Medicine</h2>
             </div>
             <div class="icon"> <i class="fas fa-tablets"></i> </div>
         </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3">
+    </div> 
+        <div class="col-lg-3">
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
-                <h3>65</h3>
+                <h3>{{expired_medicine_count}}</h3>
 
 
                 <h2>Expired Medicine</h2>
             </div>
             <div class="icon"> <i class="fas fa-tablets"></i> </div>
         </div>
-    </div>
+    </div>  
     <div class="col-lg-3">
         <!-- small box -->
         <div class="small-box bg-info">
@@ -77,26 +76,18 @@
     
     <div class="col-lg-3">
         <!-- small box -->
-        <div class="small-box bg-info">
+        <div class="small-box bg-info" style="height: 250px;">
             <div class="inner">
-                   <h2>Total Sales</h2>
+                <h2>Total Sales</h2>
             </div>           
-        </div><div class="small-box bg-info">
+        </div><div class="small-box bg-info" style="height: 250px;">
             <div class="inner">
-                   <h2>Total Sales</h2>
-            </div>           
-        </div><div class="small-box bg-info">
-            <div class="inner">
-                   <h2>Total Sales</h2>
-            </div>           
-        </div><div class="small-box bg-info">
-            <div class="inner">
-                   <h2>Total Sales</h2>
+                <h2>Total Sales</h2>
             </div>           
         </div>
     </div>
     
- </div>
+</div>
 
 <div class="col-12">
     <div class="card">
@@ -147,26 +138,27 @@
 {% block script %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>      
 <script>
-   const ctx = document.getElementById('myChart');
+const ctx = document.getElementById('myChart');
     new Chart(ctx, {
-     type: 'line',
-     data: {
-       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-       datasets: [{
-         label: '# of Votes',
-         data: [12, 19, 3, 5, 2, 3],
-         borderWidth: 1
-       }]
-     },
-     options: {
-       scales: {
-         y: {
-           beginAtZero: true
-         }
-       }
-     }
-   });
- </script>
+    type: 'bar',
+    data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    datasets: [{
+        label: 'Medicine Stock',
+        data: [{{jan_medicine}}, {{feb_medicine}}, {{mar_medicine}}, {{apr_medicine}}, {{may_medicine}}, {{june_medicine}}, {{july_medicine}}, {{aug_medicine}}, {{sep_medicine}}, {{oct_medicine}}, {{nov_medicine}}, {{dec_medicine}}],
+        borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+        y: {
+        beginAtZero: true
+        }
+    }
+    }
+});
+</script>
 
 {% include "partials/script.html" %}
 {% endblock script %}
+

@@ -4,6 +4,7 @@ from dashboard.models import Medicine
 from dashboard.forms import EmployeeRegisterForm, EmployeeUpdateForm, MedicineUpdateForm
 from django.contrib import messages
 from accounts.models import User
+from django.utils import timezone
 
 
 
@@ -11,8 +12,40 @@ from accounts.models import User
 @login_required(login_url='/')
 def dashboard_page(request):
     medicine = Medicine.objects.all()
+    users_count = User.objects.filter(is_customer=True).count()
+    medicine_count = Medicine.objects.all().count()
+    expired_medicine_count = Medicine.objects.filter(expiry_date__lt=timezone.now()).count()
+
+    jan_medicine = Medicine.objects.filter(created_date__month=1).count()
+    feb_medicine = Medicine.objects.filter(created_date__month=2).count()
+    mar_medicine = Medicine.objects.filter(created_date__month=3).count()
+    apr_medicine = Medicine.objects.filter(created_date__month=4).count()
+    may_medicine = Medicine.objects.filter(created_date__month=5).count()
+    june_medicine = Medicine.objects.filter(created_date__month=6).count()
+    july_medicine = Medicine.objects.filter(created_date__month=7).count()
+    aug_medicine = Medicine.objects.filter(created_date__month=8).count()
+    sep_medicine = Medicine.objects.filter(created_date__month=9).count()
+    oct_medicine = Medicine.objects.filter(created_date__month=10).count()
+    nov_medicine = Medicine.objects.filter(created_date__month=11).count()
+    dec_medicine = Medicine.objects.filter(created_date__month=12).count()
     context = {
-        'medicine' : medicine
+        'medicine' : medicine,
+        'users_count' : users_count,
+        'medicine_count' : medicine_count,
+        'expired_medicine_count' : expired_medicine_count,
+        'jan_medicine' : jan_medicine,
+        'feb_medicine' : feb_medicine,
+        'mar_medicine' : mar_medicine,
+        'apr_medicine' : apr_medicine,
+        'may_medicine' : may_medicine,
+        'june_medicine' : june_medicine,
+        'july_medicine' : july_medicine,
+        'aug_medicine' : aug_medicine,
+        'sep_medicine' : sep_medicine,
+        'oct_medicine' : oct_medicine,
+        'nov_medicine' : nov_medicine,
+        'dec_medicine' : dec_medicine,
+        
     }
     return render(request,'dashboard/dashboard.html', context)
 
