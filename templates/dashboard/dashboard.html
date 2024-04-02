@@ -9,59 +9,85 @@
 {% endblock sidebar %}
 
 {% block content %}
+{% if request.user.is_superuser %}
+<h1 class="m-2 text-mute">DashBoard</h1>
 <div class="row mt-2">
-    <div class="col-lg-3 col-6">
+
+    <!-- ./col -->
+    <div class="col-lg-3">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner ">
+                <h3>{{users_count}}</h3>
+
+
+                <h2>Total Customer</h2>
+            </div>
+            <div class="icon"> <i class="fas fa-user"></i> </div>
+        </div>
+    </div>
+    
+    <!-- ./col -->
+    <div class="col-lg-3">
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
-                <h3>150</h3>
+                <h3>{{medicine_count}}</h3>
 
 
-                <p>Total medicine</p>
+                <h2>Total Medicine</h2>
             </div>
+            <div class="icon"> <i class="fas fa-tablets"></i> </div>
         </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
+    </div> 
+        <div class="col-lg-3">
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
-                <h3>53</h3>
+                <h3>{{expired_medicine_count}}</h3>
 
 
-                <p>Total Users</p>
+                <h2>Expired Medicine</h2>
             </div>
+            <div class="icon"> <i class="fas fa-tablets"></i> </div>
         </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>44</h3>
-
-
-                <p>User Docters</p>
-            </div>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
+    </div>  
+    <div class="col-lg-3">
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
                 <h3>65</h3>
 
 
-                <p>Total reports</p>
+                <h2>Total Invoice</h2>
             </div>
+            <div class="icon"> <i class="fas fa-dollar-sign"></i> </div>
         </div>
     </div>
     <!-- ./col -->
 </div>
 
-
-
+<div class="row" >
+    <div class="col-9" >
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+    
+    <div class="col-lg-3">
+        <!-- small box -->
+        <div class="small-box bg-info" style="height: 250px;">
+            <div class="inner">
+                <h2>Total Sales</h2>
+            </div>           
+        </div><div class="small-box bg-info" style="height: 250px;">
+            <div class="inner">
+                <h2>Total Sales</h2>
+            </div>           
+        </div>
+    </div>
+    
+</div>
 
 <div class="col-12">
     <div class="card">
@@ -75,120 +101,64 @@
                     <tr>
                         <th style="width: 10px">S.N</th>
                         <th>Medicine Name</th>
-                        <th>Catgory</th>
-                        <th>Total Quantity</th>
-                        <th>Price per Unit</th>
+                        <th>generic name</th>
+                        <th>dosage strength</th>
+                        <th>dose form</th>
+                        <th>manufacture name</th>
+                        <th>manufacture date</th>
+                        <th>expiry date</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
+                    {% for i in medicine  %}
                     <tr>
-                        <td>1.</td>
-                        <td><a href="#">paracitamol</a></td>
+                        <td>{{forloop.counter}}</td>
+                        <td><a href="#">{{i.name}}</a></td>
                         <td>
-                            medicine
+                            {{i.generic_name}}
                         </td>
-                        <td>15248</td>
-                        <td>RS 1500/-</td>
+                        <td>{{i.dosage_strength}}</td>
+                        <td>{{i.dose_form}}</td>
+                        <td>{{i.manufacture_name}}</td>
+                        <td>{{i.manufacture_date}}</td>
+                        <td>{{i.expiry_date}}</td>
+                        
                     </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">DOCTER LIST</h3>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th style="width: 10px">S.N</th>
-                        <th>Docter Name</th>
-                        <th>Department</th>
-                        <th>contant number</th>
-                        <th>email</th>
-                        <th>Address</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1.</td>
-                        <td><a href="#">Ram Kumar yadav</a></td>
-                        <td>general opd</td>
-                        <td>984785642310</td>
-                        <td>ramkumaryadav@gmail.com</td>
-                        <td>Kathmandu - Nepal </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">PATIENT LIST</h3>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th style="width: 10px">S.N</th>
-                        <th>Patient Name</th>
-                        <th>Constult Docter</th>
-                        <th>contant number</th>
-                        <th>email</th>
-                        <th>Address</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1.</td>
-                        <td><a href="#">Ram Kumar yadav</a></td>
-                        <td>general opd</td>
-                        <td>984785642310</td>
-                        <td>ramkumaryadav@gmail.com</td>
-                        <td>Kathmandu - Nepal </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">REPORT LIST</h3>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th style="width: 10px">S.N</th>
-                        <th>Patient Name</th>
-                        <th>Constult Docter</th>
-                        <th>Consult Date</th>
-                        <th>Report</th>
-                        <th>Generated by</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1.</td>
-                        <td><a href="#">Ram Kumar yadav</a></td>
-                        <td><a href="#">Hari Kumar yadav</a></td>
-                        <td>2024/22/22</td>
-                        <td><a href="#">report.pdf</a></td>
-                        <td>Hari Kumar</td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-
+{% endif %}
 {% endblock content %}
 
 {% block script %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>      
+<script>
+const ctx = document.getElementById('myChart');
+    new Chart(ctx, {
+    type: 'bar',
+    data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    datasets: [{
+        label: 'Medicine Stock',
+        data: [{{jan_medicine}}, {{feb_medicine}}, {{mar_medicine}}, {{apr_medicine}}, {{may_medicine}}, {{june_medicine}}, {{july_medicine}}, {{aug_medicine}}, {{sep_medicine}}, {{oct_medicine}}, {{nov_medicine}}, {{dec_medicine}}],
+        borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+        y: {
+        beginAtZero: true
+        }
+    }
+    }
+});
+</script>
+
 {% include "partials/script.html" %}
 {% endblock script %}
+

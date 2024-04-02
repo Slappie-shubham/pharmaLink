@@ -8,8 +8,11 @@ class Medicine(models.Model):
     dose_form = models.CharField(max_length=255)
     manufacture_name = models.CharField(max_length=255)
     manufacture_date = models.DateField()
+    stock = models.CharField(max_length=55)
+    batch = models.CharField(max_length=55, default="0000")
     expiry_date = models.DateField()
     extra_detail = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
 
 
     class Meta:
