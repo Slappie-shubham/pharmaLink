@@ -23,6 +23,15 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
+                    <a href="{% url "dashboard:dashboard_page" %}" class="nav-link">
+                        <i class="nav-icon fas fa-home mr-2"></i>
+                        <p>
+                            DashBoard   
+                        </p>
+                    </a>
+                </li>
+                {% if request.user.is_superuser %}
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user mr-2"></i>
 
@@ -50,12 +59,14 @@
                         </li>
                     </ul>
                 </li>
+                {% endif %}
+                {% if not request.user.is_customer %}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user mr-2"></i>
 
                         <p>
-                            Medicine
+                            Stocks
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -64,7 +75,7 @@
                             <a href="{% url "dashboard:add_medicine" %}" class="nav-link">
                                 <i class=" fas fa-plus nav-icon"></i>
 
-                                <p>Add Medicine</p>
+                                <p>Add Stock</p>
                             </a>
                         </li>
                     </ul>
@@ -73,12 +84,38 @@
                             <a href="{% url "dashboard:medicine_list_admin" %}" class="nav-link">
                                 <i class=" fas fa-eye nav-icon"></i>
 
-                                <p>View Medicine</p>
+                                <p>View Stocks</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-                
+                {% endif %}
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-prescription-bottle-alt mr-2"></i>
+                        <p>
+                            Your prescription
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "dashboard:faq_list" %}" class="nav-link">
+                        <i class="nav-icon fas fa-question mr-2"></i>
+                        <p>
+                            FAQ
+                        </p>
+                    </a>
+                </li>
+                {% if request.user.is_superuser %}
+                <li class="nav-item">
+                    <a href="{% url "dashboard:faq_add" %}" class="nav-link">
+                        <i class="nav-icon fas fa-question mr-2"></i>
+                        <p>
+                            Add FAQ
+                        </p>
+                    </a>
+                </li>
+                {% endif %}
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

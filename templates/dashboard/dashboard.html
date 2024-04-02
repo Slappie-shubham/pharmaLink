@@ -35,7 +35,7 @@
                 <h3>{{medicine_count}}</h3>
 
 
-                <h2>Total Medicine</h2>
+                <h2>Total Stocks</h2>
             </div>
             <div class="icon"> <i class="fas fa-tablets"></i> </div>
         </div>
@@ -88,11 +88,12 @@
     </div>
     
 </div>
-
+{% endif %}
+{% if request.user.is_superuser or request.user.is_employee %}
 <div class="col-12">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">MEDICINE LIST</h3>
+            <h3 class="card-title">STOCK LIST</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -100,7 +101,7 @@
                 <thead>
                     <tr>
                         <th style="width: 10px">S.N</th>
-                        <th>Medicine Name</th>
+                        <th>Stock Name</th>
                         <th>generic name</th>
                         <th>dosage strength</th>
                         <th>dose form</th>
@@ -131,7 +132,11 @@
         </div>
     </div>
 </div>
-
+{% endif %}
+{% if request.user.is_customer %}
+<div class="container">
+    <h1 class="text-center text-muted pt-5">Your Prescription Details</h1>
+</div>
 {% endif %}
 {% endblock content %}
 
