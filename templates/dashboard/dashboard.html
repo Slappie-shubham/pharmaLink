@@ -133,7 +133,11 @@
     </div>
 </div>
 {% endif %}
-
+{% if request.user.is_customer %}
+<div class="container">
+    <h1 class="text-center text-muted pt-5">Your Prescription Details</h1>
+</div>
+{% endif %}
 {% endblock content %}
 
 {% block script %}
