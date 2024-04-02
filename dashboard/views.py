@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from dashboard.models import Medicine
-from dashboard.forms import EmployeeRegisterForm, EmployeeUpdateForm, MedicineUpdateForm
+from dashboard.models import Stocks, FAQ
+from dashboard.forms import EmployeeRegisterForm, EmployeeUpdateForm, StocksUpdateForm, FaqAddForm
 from django.contrib import messages
 from accounts.models import User
 from django.utils import timezone
@@ -11,23 +11,23 @@ from django.utils import timezone
 # Create your views here.
 @login_required(login_url='/')
 def dashboard_page(request):
-    medicine = Medicine.objects.all()
+    medicine = Stocks.objects.all()
     users_count = User.objects.filter(is_customer=True).count()
-    medicine_count = Medicine.objects.all().count()
-    expired_medicine_count = Medicine.objects.filter(expiry_date__lt=timezone.now()).count()
+    medicine_count = Stocks.objects.all().count()
+    expired_medicine_count = Stocks.objects.filter(expiry_date__lt=timezone.now()).count()
 
-    jan_medicine = Medicine.objects.filter(created_date__month=1).count()
-    feb_medicine = Medicine.objects.filter(created_date__month=2).count()
-    mar_medicine = Medicine.objects.filter(created_date__month=3).count()
-    apr_medicine = Medicine.objects.filter(created_date__month=4).count()
-    may_medicine = Medicine.objects.filter(created_date__month=5).count()
-    june_medicine = Medicine.objects.filter(created_date__month=6).count()
-    july_medicine = Medicine.objects.filter(created_date__month=7).count()
-    aug_medicine = Medicine.objects.filter(created_date__month=8).count()
-    sep_medicine = Medicine.objects.filter(created_date__month=9).count()
-    oct_medicine = Medicine.objects.filter(created_date__month=10).count()
-    nov_medicine = Medicine.objects.filter(created_date__month=11).count()
-    dec_medicine = Medicine.objects.filter(created_date__month=12).count()
+    jan_medicine = Stocks.objects.filter(created_date__month=1).count()
+    feb_medicine = Stocks.objects.filter(created_date__month=2).count()
+    mar_medicine = Stocks.objects.filter(created_date__month=3).count()
+    apr_medicine = Stocks.objects.filter(created_date__month=4).count()
+    may_medicine = Stocks.objects.filter(created_date__month=5).count()
+    june_medicine = Stocks.objects.filter(created_date__month=6).count()
+    july_medicine = Stocks.objects.filter(created_date__month=7).count()
+    aug_medicine = Stocks.objects.filter(created_date__month=8).count()
+    sep_medicine = Stocks.objects.filter(created_date__month=9).count()
+    oct_medicine = Stocks.objects.filter(created_date__month=10).count()
+    nov_medicine = Stocks.objects.filter(created_date__month=11).count()
+    dec_medicine = Stocks.objects.filter(created_date__month=12).count()
     context = {
         'medicine' : medicine,
         'users_count' : users_count,
@@ -101,12 +101,12 @@ def update_employee(request, id):
 
 @login_required(login_url='/')
 def medicine_list_admin(request):
-    medicine = Medicine.objects.all()
+    medicine = Stocks.objects.all()
     return render(request, "dashboard/medicine/list.html", {"medicine" : medicine})
 
 @login_required(login_url='/')
 def delete_medicine(request, id):
-    medicine = Medicine.objects.filter(id=id).first()
+    medicine = Stocks.objects.filter(id=id).first()
     medicine.delete()
     return redirect("dashboard:medicine_list_admin")
 
@@ -114,27 +114,44 @@ def delete_medicine(request, id):
 @login_required(login_url='/')
 def update_medicine(request, id):
 
-    medicine = Medicine.objects.filter(id=id).first()
+    medicine = Stocks.objects.filter(id=id).first()
     if request.method == "POST":
-        form = MedicineUpdateForm(request.POST, instance=medicine)
+        form = StocksUpdateForm(request.POST, instance=medicine)
         if form.is_valid():
             medicine = form.save(commit=False)
             medicine.save()
             messages.success(request, "Successfully Updated Medicine")
             return redirect("dashboard:medicine_list_admin")
     else:
-        form = MedicineUpdateForm(instance=medicine)
+        form = StocksUpdateForm(instance=medicine)
     return render(request, "dashboard/medicine/update.html", {'form': form})
 
 @login_required(login_url='/')
 def add_medicine(request):
     if request.method == "POST":
-        form = MedicineUpdateForm(request.POST)
+        form = StocksUpdateForm(request.POST)
         if form.is_valid():
             medicine = form.save(commit=False)
             medicine.save()
             messages.success(request, "Successfully Added Medicine")
             return redirect("dashboard:medicine_list_admin")
     else:
-        form = MedicineUpdateForm()
+        form = StocksUpdateForm()
     return render(request, 'dashboard/medicine/add.html', {'form': form})
+
+@login_required(login_url='/')
+def faq_list(request):
+    faq = FAQ.objects.all()
+    return render(request, "dashboard/faq/list.html", {'faq': faq})
+
+@login_required(login_url='/')
+def faq_add(request):
+    if request.method == "POST":
+        form = FaqAddForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Successfully Added FAQ")
+            return redirect("dashboard:faq_list")
+    else:
+        form = FaqAddForm()
+    return render(request, 'dashboard/faq/add.html', {'form': form})

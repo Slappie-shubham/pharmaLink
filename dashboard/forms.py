@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from accounts.models import User
-from dashboard.models import Medicine
+from dashboard.models import Stocks, FAQ
 
 class EmployeeRegisterForm(UserCreationForm):
     class Meta:
@@ -13,12 +13,15 @@ class EmployeeUpdateForm(forms.ModelForm):
         model = User
         fields = ('email', 'first_name', 'last_name', 'address', 'phone', 'dob')
 
-class MedicineUpdateForm(forms.ModelForm):    
+class StocksUpdateForm(forms.ModelForm):    
     class Meta:
-        model = Medicine
+        model = Stocks
         fields = ('name', 'generic_name', 'dosage_strength', 'dose_form', 'manufacture_name', 'manufacture_date', 'stock', 'batch', 'expiry_date','extra_detail')
 
-
+class FaqAddForm(forms.ModelForm):
+    class Meta:
+        model = FAQ
+        fields = ('question', 'answer')
 
 
 
