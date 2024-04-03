@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from dashboard.models import Stocks, FAQ
-from dashboard.forms import EmployeeRegisterForm, EmployeeUpdateForm, StocksUpdateForm, FaqAddForm
+from dashboard.models import Stocks, FAQ, DoctorsPrescription
+from dashboard.forms import EmployeeRegisterForm, EmployeeUpdateForm, StocksUpdateForm, FaqAddForm, DoctorsPrescriptionAddForm
 from django.contrib import messages
 from accounts.models import User
 from django.utils import timezone
@@ -15,6 +15,7 @@ def dashboard_page(request):
     users_count = User.objects.filter(is_customer=True).count()
     medicine_count = Stocks.objects.all().count()
     expired_medicine_count = Stocks.objects.filter(expiry_date__lt=timezone.now()).count()
+    prescription = DoctorsPrescription.objects.filter(user=request.user)
 
     jan_medicine = Stocks.objects.filter(created_date__month=1).count()
     feb_medicine = Stocks.objects.filter(created_date__month=2).count()
@@ -45,6 +46,7 @@ def dashboard_page(request):
         'oct_medicine' : oct_medicine,
         'nov_medicine' : nov_medicine,
         'dec_medicine' : dec_medicine,
+        'prescription' : prescription,
         
     }
     return render(request,'dashboard/dashboard.html', context)
@@ -155,3 +157,18 @@ def faq_add(request):
     else:
         form = FaqAddForm()
     return render(request, 'dashboard/faq/add.html', {'form': form})
+
+
+@login_required(login_url='/')
+def upload_prescription(request):
+    if request.method == "POST":
+        form = DoctorsPrescriptionAddForm(request.POST, request.FILES)
+        if form.is_valid():
+            prescription = form.save(commit=False)
+            prescription.user = request.user
+            prescription.save()
+            messages.success(request, "Successfully Uploaded")
+            return redirect("dashboard:dashboard_page")
+    else:
+        form = DoctorsPrescriptionAddForm()
+    return render(request, 'dashboard/prescription/add.html', {'form': form})

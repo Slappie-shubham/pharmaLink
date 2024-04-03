@@ -90,14 +90,16 @@
                     </ul>
                 </li>
                 {% endif %}
+                {% if request.user.is_customer %}
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{% url "dashboard:upload_prescription" %}" class="nav-link">
                         <i class="nav-icon fas fa-prescription-bottle-alt mr-2"></i>
                         <p>
                             Your prescription
                         </p>
                     </a>
                 </li>
+                {% endif %}
                 <li class="nav-item">
                     <a href="{% url "dashboard:faq_list" %}" class="nav-link">
                         <i class="nav-icon fas fa-question mr-2"></i>

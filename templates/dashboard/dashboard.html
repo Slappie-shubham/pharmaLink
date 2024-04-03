@@ -136,6 +136,18 @@
 {% if request.user.is_customer %}
 <div class="container">
     <h1 class="text-center text-muted pt-5">Your Prescription Details</h1>
+    <div class="col-12" style="height: 29px;">
+        {% for i in prescription %}
+        <div class="card" style="width: 100%;">
+            <img class="card-img-top" src="{{i.prescription.url}}" alt="Card image cap" style="height: 300px;">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">{{i.notes |safe}}</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endif %}
 {% endblock content %}

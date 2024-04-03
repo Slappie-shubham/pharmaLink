@@ -17,4 +17,6 @@ urlpatterns = [
 
     path('faq/', dashboard.faq_list, name="faq_list"),
     path('faq/add/', dashboard.faq_add, name="faq_add"),
+
+    path('upload/prescription/', dashboard.upload_prescription, name="upload_prescription"),
 ]

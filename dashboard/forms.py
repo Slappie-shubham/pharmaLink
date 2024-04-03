@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from accounts.models import User
-from dashboard.models import Stocks, FAQ
+from dashboard.models import Stocks, FAQ, DoctorsPrescription
 
 class EmployeeRegisterForm(UserCreationForm):
     class Meta:
@@ -22,6 +22,12 @@ class FaqAddForm(forms.ModelForm):
     class Meta:
         model = FAQ
         fields = ('question', 'answer')
+        
+class DoctorsPrescriptionAddForm(forms.ModelForm):
+    class Meta:
+        model = DoctorsPrescription
+        fields = ('prescription', 'notes')
+        
 
 
 
