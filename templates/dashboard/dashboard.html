@@ -1,169 +1,207 @@
 {% extends "partials/layout.html" %}
 
+
 {% block Navbar %}
 {% include "partials/navbar.html" %}
 {% endblock Navbar %}
 
+
 {% block sidebar %}
 {% include "partials/sidebar.html" %}
 {% endblock sidebar %}
+
 
 {% block content %}
 {% if request.user.is_superuser %}
 <h1 class="m-2 text-mute">DashBoard</h1>
 <div class="row mt-2">
 
-    <!-- ./col -->
-    <div class="col-lg-3">
-        <!-- small box -->
-        <div class="small-box bg-info">
-            <div class="inner ">
-                <h3>{{users_count}}</h3>
+
+   <!-- ./col -->
+   <div class="col-lg-3">
+       <!-- small box -->
+       <div class="small-box bg-info">
+           <div class="inner ">
+               <h3>{{users_count}}</h3>
 
 
-                <h2>Total Customer</h2>
-            </div>
-            <div class="icon"> <i class="fas fa-user"></i> </div>
-        </div>
-    </div>
-    
-    <!-- ./col -->
-    <div class="col-lg-3">
-        <!-- small box -->
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>{{medicine_count}}</h3>
 
 
-                <h2>Total Stocks</h2>
-            </div>
-            <div class="icon"> <i class="fas fa-tablets"></i> </div>
-        </div>
-    </div> 
-        <div class="col-lg-3">
-        <!-- small box -->
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>{{expired_medicine_count}}</h3>
+               <h2>Total Customer</h2>
+           </div>
+           <div class="icon"> <i class="fas fa-user"></i> </div>
+       </div>
+   </div>
+  
+   <!-- ./col -->
+   <div class="col-lg-3">
+       <!-- small box -->
+       <div class="small-box bg-info">
+           <div class="inner">
+               <h3>{{medicine_count}}</h3>
 
 
-                <h2>Expired Medicine</h2>
-            </div>
-            <div class="icon"> <i class="fas fa-tablets"></i> </div>
-        </div>
-    </div>  
-    <div class="col-lg-3">
-        <!-- small box -->
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>65</h3>
 
 
-                <h2>Total Invoice</h2>
-            </div>
-            <div class="icon"> <i class="fas fa-dollar-sign"></i> </div>
-        </div>
-    </div>
-    <!-- ./col -->
+               <h2>Total Stocks</h2>
+           </div>
+           <div class="icon"> <i class="fas fa-tablets"></i> </div>
+       </div>
+   </div>
+       <div class="col-lg-3">
+       <!-- small box -->
+       <div class="small-box bg-info">
+           <div class="inner">
+               <h3>{{expired_medicine_count}}</h3>
+
+
+
+
+               <h2>Expired Medicine</h2>
+           </div>
+           <div class="icon"> <i class="fas fa-tablets"></i> </div>
+       </div>
+   </div> 
+   <div class="col-lg-3">
+       <!-- small box -->
+       <div class="small-box bg-info">
+           <div class="inner">
+               <h3>65</h3>
+
+
+
+
+               <h2>Total Invoice</h2>
+           </div>
+           <div class="icon"> <i class="fas fa-dollar-sign"></i> </div>
+       </div>
+   </div>
+   <!-- ./col -->
 </div>
 
+
 <div class="row" >
-    <div class="col-9" >
-        <div>
-            <canvas id="myChart"></canvas>
-        </div>
-    </div>
-    
-    <div class="col-lg-3">
-        <!-- small box -->
-        <div class="small-box bg-info" style="height: 250px;">
-            <div class="inner">
-                <h2>Total Sales</h2>
-            </div>           
-        </div><div class="small-box bg-info" style="height: 250px;">
-            <div class="inner">
-                <h2>Total Sales</h2>
-            </div>           
-        </div>
-    </div>
-    
+   <div class="col-9" >
+       <div>
+           <canvas id="myChart"></canvas>
+       </div>
+   </div>
+  
+   <div class="col-lg-3">
+       <!-- small box -->
+       <div class="small-box bg-info" style="height: 250px;">
+           <div class="inner">
+               <h2>Total Sales</h2>
+           </div>          
+       </div><div class="small-box bg-info" style="height: 250px;">
+           <div class="inner">
+               <h2>Total Sales</h2>
+           </div>          
+       </div>
+   </div>
+  
 </div>
 {% endif %}
 {% if request.user.is_superuser or request.user.is_employee %}
 <div class="col-12">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">STOCK LIST</h3>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th style="width: 10px">S.N</th>
-                        <th>Stock Name</th>
-                        <th>generic name</th>
-                        <th>dosage strength</th>
-                        <th>dose form</th>
-                        <th>manufacture name</th>
-                        <th>manufacture date</th>
-                        <th>expiry date</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in medicine  %}
-                    <tr>
-                        <td>{{forloop.counter}}</td>
-                        <td><a href="#">{{i.name}}</a></td>
-                        <td>
-                            {{i.generic_name}}
-                        </td>
-                        <td>{{i.dosage_strength}}</td>
-                        <td>{{i.dose_form}}</td>
-                        <td>{{i.manufacture_name}}</td>
-                        <td>{{i.manufacture_date}}</td>
-                        <td>{{i.expiry_date}}</td>
-                        
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
+   <div class="card">
+       <div class="card-header">
+           <h3 class="card-title">STOCK LIST</h3>
+       </div>
+       <!-- /.card-header -->
+       <div class="card-body">
+           <table class="table table-bordered">
+               <thead>
+                   <tr>
+                       <th style="width: 10px">S.N</th>
+                       <th>Stock Name</th>
+                       <th>generic name</th>
+                       <th>dosage strength</th>
+                       <th>dose form</th>
+                       <th>manufacture name</th>
+                       <th>manufacture date</th>
+                       <th>expiry date</th>
+                      
+                   </tr>
+               </thead>
+               <tbody>
+                   {% for i in medicine  %}
+                   <tr>
+                       <td>{{forloop.counter}}</td>
+                       <td><a href="#">{{i.name}}</a></td>
+                       <td>
+                           {{i.generic_name}}
+                       </td>
+                       <td>{{i.dosage_strength}}</td>
+                       <td>{{i.dose_form}}</td>
+                       <td>{{i.manufacture_name}}</td>
+                       <td>{{i.manufacture_date}}</td>
+                       <td>{{i.expiry_date}}</td>
+                      
+                   </tr>
+                   {% endfor %}
+               </tbody>
+           </table>
+       </div>
+   </div>
 </div>
 {% endif %}
 {% if request.user.is_customer %}
 <div class="container">
-    <h1 class="text-center text-muted pt-5">Your Prescription Details</h1>
+   <h1 class="text-center text-muted pt-5">Your Prescription Details</h1>
+   {% for i in prescription %}
+   <div class="row">
+       <div class="col-12">
+           <div class="card" style="width: 100%;">
+               <img class="card-img-top" src="{{i.prescription.url}}" alt="Card image cap" style='height:600px;'>
+               <div class="card-body">
+               <hr>
+               <h5 class="card-title">Custmer Notes</h5>
+               <p class="card-text">{{i.customer_notes | safe}}</p>
+               <hr>
+               <h5 class="card-title">Pharmalink Notes</h5>
+               <p class="card-text">{{i.employee_notes | safe}}</p>
+               <hr>
+               {% if i.status %}
+               <a href="#" class="btn btn-success">Status:Order completed</a>
+               {% else %}
+               <a href="#" class="btn btn-warning">Status:Pending</a>
+               {% endif %}
+               <a href="{% url "dashboard:update_prescription" i.id %}" class="btn btn-primary">Update</a>
+               </div>
+           </div>
+       </div>
+   </div>
+   {% endfor %}
 </div>
 {% endif %}
 {% endblock content %}
 
+
 {% block script %}
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>      
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>     
 <script>
 const ctx = document.getElementById('myChart');
-    new Chart(ctx, {
-    type: 'bar',
-    data: {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    datasets: [{
-        label: 'Medicine Stock',
-        data: [{{jan_medicine}}, {{feb_medicine}}, {{mar_medicine}}, {{apr_medicine}}, {{may_medicine}}, {{june_medicine}}, {{july_medicine}}, {{aug_medicine}}, {{sep_medicine}}, {{oct_medicine}}, {{nov_medicine}}, {{dec_medicine}}],
-        borderWidth: 1
-    }]
-    },
-    options: {
-    scales: {
-        y: {
-        beginAtZero: true
-        }
-    }
-    }
+   new Chart(ctx, {
+   type: 'bar',
+   data: {
+   labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+   datasets: [{
+       label: 'Medicine Stock',
+       data: [{{jan_medicine}}, {{feb_medicine}}, {{mar_medicine}}, {{apr_medicine}}, {{may_medicine}}, {{june_medicine}}, {{july_medicine}}, {{aug_medicine}}, {{sep_medicine}}, {{oct_medicine}}, {{nov_medicine}}, {{dec_medicine}}],
+       borderWidth: 1
+   }]
+   },
+   options: {
+   scales: {
+       y: {
+       beginAtZero: true
+       }
+   }
+   }
 });
 </script>
 
+
 {% include "partials/script.html" %}
 {% endblock script %}
-

@@ -1,33 +1,29 @@
 {% extends "partials/layout.html" %}
 
-
 {% block Navbar %}
 {% include "partials/navbar.html" %}
 {% endblock Navbar %}
-
 
 {% block sidebar %}
 {% include "partials/sidebar.html" %}
 {% endblock sidebar %}
 
-
 {% block content %}
 {% load crispy_forms_tags %}
-{% if request.user.is_superuser or request.user.is_employee %}
-<h1 class="m-2 text-mute text-center">Update Medicine</h1>
+{% if request.user.is_customer %}
+<h1 class="m-2 text-mute text-center pt-5">Upload Your Prescription</h1>
+<hr>
 <div class="container">
-   <form action="" method="post">
-       {% csrf_token %}
-       {{form|crispy}}
-       <button class="btn btn-info">Update Medicine</button>
-   </form>
+    <form action="{% url "dashboard:upload_prescription" %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button class="btn btn-info" >Upload Your Prescription</button>
+    </form>
 </div>
-
 
 {% endif %}
 {% endblock content %}
 
-
-{% block script %}  
+{% block script %}   
 {% include "partials/script.html" %}
 {% endblock script %}
