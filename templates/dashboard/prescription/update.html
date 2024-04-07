@@ -13,13 +13,14 @@
 
 {% block content %}
 {% load crispy_forms_tags %}
-{% if request.user.is_superuser or request.user.is_employee %}
-<h1 class="m-2 text-mute text-center">Update Medicine</h1>
+{% if request.user.is_customer or request.user.is_employee %}
+<h1 class="m-2 text-mute text-center pt-5">Update Your Prescription</h1>
+<hr>
 <div class="container">
-   <form action="" method="post">
+   <form action="" method="post" enctype="multipart/form-data">
        {% csrf_token %}
        {{form|crispy}}
-       <button class="btn btn-info">Update Medicine</button>
+       <button class="btn btn-info" >Update Your Prescription</button>
    </form>
 </div>
 

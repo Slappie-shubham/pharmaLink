@@ -1,0 +1,54 @@
+{% extends "partials/layout.html" %}
+
+
+{% block Navbar %}
+{% include "partials/navbar.html" %}
+{% endblock Navbar %}
+
+
+{% block sidebar %}
+{% include "partials/sidebar.html" %}
+{% endblock sidebar %}
+
+
+{% block content %}
+{% load crispy_forms_tags %}
+{% if request.user.is_employee or request.user.is_superuser %}
+<div class="container">
+   <h1 class="text-center text-muted pt-5">Prescription List</h1>
+   {% for i in prescription %}
+   <div class="row">
+       <div class="col-12">
+           <div class="card" style="width: 100%;">
+               <img class="card-img-top" src="{{i.prescription.url}}" alt="Card image cap" style='height:600px;'>
+               <div class="card-body">
+               <hr>
+               <h5 class="card-title">Custmer Notes</h5>
+               <p class="card-text">{{i.customer_notes | safe}}</p>
+               <hr>
+               <h5 class="card-title">Pharmalink Notes</h5>
+               <p class="card-text">{{i.employee_notes | safe}}</p>
+               <hr>
+               {% if i.status %}
+               <a href="#" class="btn btn-success">Status:Order completed</a>
+               {% else %}
+               <a href="#" class="btn btn-warning">Status:Pending</a>
+               {% endif %}
+               {% if request.user.is_employee %}
+               <a href="{% url "dashboard:update_prescription" i.id %}" class="btn btn-primary">Update</a>
+               {% endif %}
+               </div>
+           </div>
+       </div>
+   </div>
+   {% endfor %}
+</div>
+
+
+{% endif %}
+{% endblock content %}
+
+
+{% block script %}  
+{% include "partials/script.html" %}
+{% endblock script %}
