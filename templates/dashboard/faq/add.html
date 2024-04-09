@@ -10,7 +10,7 @@
 
 {% block content %}
 {% load crispy_forms_tags %}
-{% if request.user.is_superuser %}
+{% if request.user.is_superuser or request.user.is_employee %}
 <h1 class="m-2 text-mute text-center">Add FAQ</h1>
 <div class="container">
     <form action="" method="post">
