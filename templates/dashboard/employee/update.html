@@ -11,7 +11,7 @@
 {% block content %}
 {% load crispy_forms_tags %}
 {% if request.user.is_superuser %}
-<h1 class="m-2 text-mute text-center">Update Employee</h1>
+<h1 class="p-2 text-mute text-center">Update Employee</h1>
 <div class="container">
     <form action="" method="post">
         {% csrf_token %}

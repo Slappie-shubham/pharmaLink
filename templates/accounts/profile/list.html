@@ -1,0 +1,77 @@
+{% extends "partials/layout.html" %}
+
+
+{% block Navbar %}
+{% include "partials/navbar.html" %}
+{% endblock Navbar %}
+
+
+{% block sidebar %}
+{% include "partials/sidebar.html" %}
+{% endblock sidebar %}
+
+
+{% block content %}
+<div class="container">
+   <div class="col-md-12 pt-5">
+
+
+       <!-- Profile Image -->
+       <div class="card  card-outline">
+         <div class="card-body box-profile">
+           <div class="text-center">
+               {% if profile.profile_pic.url %}
+                   <img class="profile-user-img img-fluid img-circle" src="{{profile.profile_pic.url}}" alt="User profile picture">
+               {% endif %}
+           </div>
+
+
+           <h3 class="profile-username text-center">{{profile.get_full_name}}</h3>
+
+
+           <p class="text-muted text-center">{{profile.email}}</p>
+
+
+           <ul class="list-group list-group-unbordered mb-3">
+             <li class="list-group-item">
+               <b>user status</b>
+               {% if request.user.is_customer %}
+                   <a class="float-right badge bg-primary">Customer</a>
+               {% endif %}
+               {% if request.user.is_employee %}
+                   <a class="float-right badge bg-primary">Employee</a>
+               {% endif %}
+               {% if request.user.is_superuser %}
+                   <a class="float-right badge bg-primary">Admin</a>
+               {% endif %}
+             </li>
+             <li class="list-group-item">
+               <b>Email</b> <a class="float-right">{{profile.email}}</a>
+             </li>
+             <li class="list-group-item">
+               <b>Username</b> <a class="float-right">{{profile.username}}</a>
+             </li> <li class="list-group-item">
+               <b>Date Of Birth</b> <a class="float-right">{{profile.dob}}</a>
+             </li>
+             <li class="list-group-item">
+               <b>Contact number</b> <a class="float-right">{{profile.phone}}</a>
+             </li>
+             <li class="list-group-item">
+               <b>Address</b> <a class="float-right">{{profile.address}}</a>
+             </li>
+           </ul>
+
+
+           <a href="{% url "accounts:update_profile" %}" class="btn btn-primary btn-block"><b>Update</b></a>
+         </div>
+         <!-- /.card-body -->
+       </div>
+       <!-- /.card -->
+     </div>
+</div>
+{% endblock content %}
+
+
+{% block script %}  
+{% include "partials/script.html" %}
+{% endblock script %}

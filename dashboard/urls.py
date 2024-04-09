@@ -26,4 +26,6 @@ urlpatterns = [
    path('upload/prescription/', dashboard.upload_prescription, name="upload_prescription"),
    path('prescription/<int:id>/update', dashboard.update_prescription, name="update_prescription"),
    path('prescription/', dashboard.presciption_list_admin, name="presciption_list_admin"),
+   
+   path('notification/add/', dashboard.add_notification, name="add_notification"),
 ]
