@@ -1,0 +1,57 @@
+{% extends "partials/layout.html" %}  
+
+
+{% block navbar %}
+{% include "partials/navbar.html" %}
+{% endblock navbar %}
+      
+    
+{% block sidebar %}
+{% include "partials/sidebar.html" %}
+{% endblock sidebar %}
+          
+              
+{% block content %}
+{% load crispy_forms_tags %}
+{% if request.user.is_superuser or request.user.is_employee %}
+<h1 class="m-2 text-mute text-center">Bills List</h1>
+<table class="table">
+   <thead>
+     <tr>
+       <th scope="col">S.N</th>
+       <th scope="col">Patient Name</th>
+       <th scope="col">Bill No</th>
+       <th scope="col">Address</th>
+       <th scope="col">Contact</th>
+       <th scope="col">Paid Status</th>
+       <th scope="col">Actions</th>
+     </tr>
+   </thead>
+   <tbody>
+       {% for bill in bill  %}
+     <tr>
+       <th scope="row">{{forloop.counter}}</th>
+       <td>{{bill.customer.first_name}} {{bill.customer.last_name}} </td>
+       <td>{{bill.bill_no}}</td>
+       <td>{{bill.customer.address}}</td>
+       <td>{{bill.customer.phone}}</td>
+       <td>
+           {% if bill.paid_status == True %}
+           <p class="badge badge-success">Paid</p>
+           {% else %}
+           <p class="badge badge-warning">UnPaid</p>
+           {% endif %}
+       </td>
+       <td><a href="{% url "dashboard:update_bill" bill.id %}" class="btn btn-primary">Edit</a></td>
+     </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+{% endif %}
+{% endblock content %} 
+{% block script %}
+{% include "partials/script.html" %}
+{% endblock script %}
+
+
+

@@ -3,188 +3,265 @@
 
 
 
+
+
+
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-  <!-- Brand Logo -->
-  <a href="{% url "dashboard:dashboard_page" %}" class="brand-link">
-      <img src="{% static 'dist/img/R.jpg' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-          style="opacity: .8">
-      <span class="brand-text font-weight-light">pharmaLink</span>
-  </a>
+ <!-- Brand Logo -->
+ <a href="{% url "dashboard:dashboard_page" %}" class="brand-link">
+     <img src="{% static 'dist/img/R.jpg' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+         style="opacity: .8">
+     <span class="brand-text font-weight-light">pharmaLink</span>
+ </a>
 
 
 
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-              <img src="{% static 'dist/img/123.jpg' %}" class="img-circle elevation-2" alt="User Image">
-          </div>
-          <div class="info">
-              <a href="#" class="d-block">{{request.user.get_full_name}}</a>
-          </div>
-      </div>
-      <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-              data-accordion="false">
+
+
+
+
+ <!-- Sidebar -->
+ <div class="sidebar">
+     <!-- Sidebar user panel (optional) -->
+     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+         <div class="image">
+             <img src="{% static 'dist/img/123.jpg' %}" class="img-circle elevation-2" alt="User Image">
+         </div>
+         <div class="info">
+             <a href="#" class="d-block">{{request.user.get_full_name}}</a>
+         </div>
+     </div>
+     <nav class="mt-2">
+         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+             data-accordion="false">
+             <li class="nav-item">
+                 <a href="{% url "dashboard:dashboard_page" %}" class="nav-link">
+                     <i class="nav-icon fas fa-home mr-2"></i>
+                     <p>
+                         DashBoard
+                     </p>
+                 </a>
+             </li>
+             {% if request.user.is_superuser %}
+             <li class="nav-item">
+                 <a href="#" class="nav-link">
+                     <i class="nav-icon fas fa-user mr-2"></i>
+
+
+
+
+
+
+
+
+                     <p>
+                         Employee
+                         <i class="fas fa-angle-left right"></i>
+                     </p>
+                 </a>
+                 <ul class="nav nav-treeview">
+                     <li class="nav-item">
+                         <a href="{% url "dashboard:add_employee" %}" class="nav-link">
+                             <i class=" fas fa-plus nav-icon"></i>
+
+
+
+
+
+
+
+
+                             <p>Add Employee</p>
+                         </a>
+                     </li>
+                 </ul>
+                 <ul class="nav nav-treeview">
+                     <li class="nav-item">
+                         <a href="{% url "dashboard:list_employee" %}" class="nav-link">
+                             <i class=" fas fa-eye nav-icon"></i>
+
+
+
+
+
+
+
+
+                             <p>View Employee</p>
+                         </a>
+                     </li>
+                 </ul>
+             </li>
+             {% endif %}
+             {% if not request.user.is_customer %}
+             <li class="nav-item">
+                 <a href="#" class="nav-link">
+                     <i class="nav-icon fas fa-user mr-2"></i>
+
+
+
+
+
+
+
+
+                     <p>
+                         Stocks
+                         <i class="fas fa-angle-left right"></i>
+                     </p>
+                 </a>
+                 <ul class="nav nav-treeview">
+                     <li class="nav-item">
+                         <a href="{% url "dashboard:add_medicine" %}" class="nav-link">
+                             <i class=" fas fa-plus nav-icon"></i>
+                             <p>Add Stock</p>
+                         </a>
+                     </li>
+                 </ul>
+                 <ul class="nav nav-treeview">
+                     <li class="nav-item">
+                         <a href="{% url "dashboard:medicine_list_admin" %}" class="nav-link">
+                             <i class=" fas fa-eye nav-icon"></i>
+                             <p>View Stocks</p>
+                         </a>
+                     </li>
+                 </ul>
+             </li>
+             {% endif %}
+             {% if request.user.is_customer or request.user.is_employee or request.user.is_superuser%}
+             <li class="nav-item">
+                 <a href="#" class="nav-link">
+                     <i class="nav-icon fas fa-prescription-bottle-alt mr-2"></i>
+                     <p>
+                         prescription
+                         <i class="fas fa-angle-left right"></i>
+                     </p>
+                 </a>
+                 {% if request.user.is_customer or request.user.is_employee %}
+                 <ul class="nav nav-treeview">
+                     <li class="nav-item">
+                         <a href="{% url "dashboard:upload_prescription" %}" class="nav-link">
+                             <i class=" fas fa-prescription-bottle-alt nav-icon"></i>
+                             <p>Add prescription</p>
+                         </a>
+                     </li>
+                 </ul>
+                 {% endif %}
+                 {% if request.user.is_employee or request.user.is_superuser %}
+                 <ul class="nav nav-treeview">
+                     <li class="nav-item">
+                         <a href="{% url "dashboard:presciption_list_admin" %}" class="nav-link">
+                             <i class=" fas fa-eye nav-icon"></i>
+                             <p>View prescription</p>
+                         </a>
+                     </li>
+                 </ul>
+                 {% endif %}
+             </li>
+             {% endif %}
+             {% if not request.user.is_customer %}
+             <li class="nav-item">
+                 <a href="#" class="nav-link">
+                     <i class="nav-icon fas fa-user mr-2"></i>
+                     <p>
+                         FAQ
+                         <i class="fas fa-angle-left right"></i>
+                     </p>
+                 </a>
+                
+                 <ul class="nav nav-treeview">
+                     <li class="nav-item">
+                         <a href="{% url "dashboard:faq_list" %}" class="nav-link">
+                             <i class=" fas fa-plus nav-icon"></i>
+                             <p>View FAQ</p>
+                         </a>
+                     </li>
+                 </ul>
+                 {% if request.user.is_superuser  or request.user.is_employee %}
+                 <ul class="nav nav-treeview">
+                     <li class="nav-item">
+                         <a href="{% url "dashboard:faq_add" %}    " class="nav-link">
+                             <i class=" fas fa-eye nav-icon"></i>
+                             <p>Add FAQ</p>
+                         </a>
+                     </li>
+                 </ul>
+                 {% endif %}
+             </li>
+           {% endif %}
+             {% if request.user.is_employee or request.user.is_superuser %}
               <li class="nav-item">
-                  <a href="{% url "dashboard:dashboard_page" %}" class="nav-link">
-                      <i class="nav-icon fas fa-home mr-2"></i>
+                  <a href="{% url "dashboard:add_notification" %}" class="nav-link">
+                      <i class="nav-icon fas fa-prescription-bottle-alt mr-2"></i>
                       <p>
-                          DashBoard 
+                          Add Notification
+                          <i class="fas fa-angle-right right"></i>
                       </p>
                   </a>
-              </li>
-              {% if request.user.is_superuser %}
-              <li class="nav-item">
-                  <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-user mr-2"></i>
-
-
-
-
-                      <p>
-                          Employee
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                          <a href="{% url "dashboard:add_employee" %}" class="nav-link">
-                              <i class=" fas fa-plus nav-icon"></i>
-
-
-
-
-                              <p>Add Employee</p>
-                          </a>
-                      </li>
-                  </ul>
-                  <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                          <a href="{% url "dashboard:list_employee" %}" class="nav-link">
-                              <i class=" fas fa-eye nav-icon"></i>
-
-
-
-
-                              <p>View Employee</p>
-                          </a>
-                      </li>
-                  </ul>
               </li>
               {% endif %}
               {% if not request.user.is_customer %}
-              <li class="nav-item">
-                  <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-user mr-2"></i>
+             <li class="nav-item">
+                 <a href="#" class="nav-link">
+                     <i class="nav-icon fas fa-user mr-2"></i>
+                     <p>
+                         Sales
+                         <i class="fas fa-angle-left right"></i>
+                     </p>
+                 </a>
+                 <ul class="nav nav-treeview">
+                     <li class="nav-item">
+                         <a href="{% url "dashboard:add_sales" %}" class="nav-link">
+                             <i class=" fas fa-plus nav-icon"></i>
+                             <p>Add sales</p>
+                         </a>
+                     </li>
+                 </ul>
+                 <ul class="nav nav-treeview">
+                     <li class="nav-item">
+                         <a href="{% url "dashboard:sales_list" %}" class="nav-link">
+                             <i class=" fas fa-eye nav-icon"></i>
+                             <p>View Sales</p>
+                         </a>
+                     </li>
+                 </ul>
+             </li>
+             {% endif %}
+             {% if request.user.is_superuser or request.user.is_employee %}
+             <li class="nav-item">
+                 <a href="#" class="nav-link">
+                     <i class="nav-icon fas fa-user mr-2"></i>
 
 
-
-
-                      <p>
-                          Stocks
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                          <a href="{% url "dashboard:add_medicine" %}" class="nav-link">
-                              <i class=" fas fa-plus nav-icon"></i>
-
-
-
-
-                              <p>Add Stock</p>
-                          </a>
-                      </li>
-                  </ul>
-                  <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                          <a href="{% url "dashboard:medicine_list_admin" %}" class="nav-link">
-                              <i class=" fas fa-eye nav-icon"></i>
-
-
-
-
-                              <p>View Stocks</p>
-                          </a>
-                      </li>
-                  </ul>
-              </li>
-              {% endif %}
-              {% if request.user.is_customer or request.user.is_employee or request.user.is_superuser%}
-              <li class="nav-item">
-                  <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-prescription-bottle-alt mr-2"></i>
-
-
-
-
-                      <p>
-                          prescription
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
-                  {% if request.user.is_customer %}
-                  <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                          <a href="{% url "dashboard:upload_prescription" %}" class="nav-link">
-                              <i class=" fas fa-prescription-bottle-alt nav-icon"></i>
-                              <p>Add prescription</p>
-                          </a>
-                      </li>
-                  </ul>
-                  {% endif %}
-                  {% if request.user.is_employee or request.user.is_superuser %}
-                  <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                          <a href="{% url "dashboard:presciption_list_admin" %}" class="nav-link">
-                              <i class=" fas fa-eye nav-icon"></i>
-
-
-
-
-                              <p>View prescription</p>
-                          </a>
-                      </li>
-                  </ul>
-                  {% endif %}
-              </li>
-              {% endif %}
-              <li class="nav-item">
-                  <a href="{% url "dashboard:faq_list" %}" class="nav-link">
-                      <i class="nav-icon fas fa-question mr-2"></i>
-                      <p>
-                          FAQ
-                      </p>
-                  </a>
-              </li>
-              {% if request.user.is_superuser  or request.user.is_employee %}
-              <li class="nav-item">
-                  <a href="{% url "dashboard:faq_add" %}" class="nav-link">
-                      <i class="nav-icon fas fa-question mr-2"></i>
-                      <p>
-                          Add FAQ
-                      </p>
-                  </a>
-              </li>
-              {% endif %}
-              {% if request.user.is_employee or request.user.is_superuser %}
-               <li class="nav-item">
-                   <a href="{% url "dashboard:add_notification" %}" class="nav-link">
-                       <i class="nav-icon fas fa-prescription-bottle-alt mr-2"></i>
-                       <p>
-                           Add Notification
-                           <i class="fas fa-angle-right right"></i>
-                       </p>
-                   </a>
-               </li>
-               {% endif %}
-          </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-  </div>
-  <!-- /.sidebar -->
+                     <p>
+                         Bills
+                         <i class="fas fa-angle-left right"></i>
+                     </p>
+                 </a>
+                 <ul class="nav nav-treeview">
+                     <li class="nav-item">
+                         <a href="{% url "dashboard:generate_bill" %}" class="nav-link">
+                             <i class=" fas fa-plus nav-icon"></i>
+                             <p>Create Bills</p>
+                         </a>
+                     </li>
+                 </ul>
+                 <ul class="nav nav-treeview">
+                     <li class="nav-item">
+                         <a href="{% url "dashboard:list_bill" %}" class="nav-link">
+                             <i class=" fas fa-eye nav-icon"></i>
+                             <p>Bills</p>
+                         </a>
+                     </li>
+                 </ul>
+             </li>
+             {% endif %}
+         </ul>
+     </nav>
+     <!-- /.sidebar-menu -->
+ </div>
+ <!-- /.sidebar -->
 </aside>
+
