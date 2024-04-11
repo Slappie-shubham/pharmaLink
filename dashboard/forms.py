@@ -6,55 +6,105 @@ from dashboard.models import *
 
 
 
+
+
+
+
 class EmployeeRegisterForm(UserCreationForm):
-  class Meta:
-      model = User
-      fields = ('email', 'first_name', 'last_name', 'address', 'phone', 'dob', 'password1', 'password2')
+ class Meta:
+     model = User
+     fields = ('email', 'first_name', 'last_name', 'address', 'phone', 'dob', 'password1', 'password2')
 
 
 
 
-class EmployeeUpdateForm(forms.ModelForm):  
-  class Meta:
-      model = User
-      fields = ('email', 'first_name', 'last_name', 'address', 'phone', 'dob')
+
+
+
+
+class EmployeeUpdateForm(forms.ModelForm): 
+ class Meta:
+     model = User
+     fields = ('email', 'first_name', 'last_name', 'address', 'phone', 'dob')
+
+
+
+
 
 
 
 
 class StocksUpdateForm(forms.ModelForm):
-   manufacture_date = forms.DateField(widget=forms.DateInput(attrs={'class': 'datepicker'}))  
-   expiry_date = forms.DateField(widget=forms.DateInput(attrs={'class': 'datepicker'}))  
-   class Meta:
-      model = Stocks
-      fields = ('name', 'generic_name', 'dosage_strength', 'dose_form', 'manufacture_name', 'manufacture_date', 'stock', 'batch', 'expiry_date','extra_detail')
+  manufacture_date = forms.DateField(widget=forms.DateInput(attrs={'class': 'datepicker'})) 
+  expiry_date = forms.DateField(widget=forms.DateInput(attrs={'class': 'datepicker'})) 
+  class Meta:
+     model = Stocks
+     fields = ('name', 'generic_name', 'dosage_strength', 'dose_form', 'manufacture_name', 'manufacture_date', 'stock', 'batch', 'expiry_date','extra_detail')
+
+
+
+
 
 
 
 
 class FaqAddForm(forms.ModelForm):
-  class Meta:
-      model = FAQ
-      fields = ('question', 'answer')
-    
+ class Meta:
+     model = FAQ
+     fields = ('question', 'answer')
+  
 class DoctorsPrescriptionAddForm(forms.ModelForm):
-  class Meta:
-      model = DoctorsPrescription
-      fields = ('prescription', 'customer_notes')
-    
+ class Meta:
+     model = DoctorsPrescription
+     fields = ('prescription', 'customer_notes')
+  
 class DoctorsPrescriptioncustomerUpdateForm(forms.ModelForm):
-  class Meta:
-      model = DoctorsPrescription
-      fields = ('prescription', 'customer_notes')
+ class Meta:
+     model = DoctorsPrescription
+     fields = ('prescription', 'customer_notes')
+
+
 
 
 class DoctorsPrescriptionemployeeUpdateForm(forms.ModelForm):
-  class Meta:
-      model = DoctorsPrescription
-      fields = ('employee_notes','status')
-     
-     
+ class Meta:
+     model = DoctorsPrescription
+     fields = ('employee_notes','status')
+   
+   
 class AddNotification(forms.ModelForm):
+ class Meta:
+     model = Notification
+     fields = ('specific_user','notification')
+    
+class SalesForm(forms.ModelForm):
+  manufacture_date = forms.DateField(widget=forms.DateInput(attrs={'class': 'datepicker'})) 
+  expiry_date = forms.DateField(widget=forms.DateInput(attrs={'class': 'datepicker'})) 
   class Meta:
-      model = Notification
-      fields = ('specific_user','notification')
+     model = Sales
+     fields = ('name', 'generic_name', 'dosage_strength', 'dose_form', 'manufacture_name', 'manufacture_date', 'qty', 'batch', 'expiry_date','price','extra_detail')
+
+
+
+
+
+
+
+
+class GenerateBillForm(forms.ModelForm):
+   class Meta:
+       model = Bills
+       fields = ('customer','prescription', 'bill_no', 'sub_total', 'discount', 'net_amount', 'paid_status')
+
+
+       labels = {
+           "customer" : "customer"
+       }
+      
+
+
+class AddBillItemForm(forms.ModelForm):
+   class Meta:
+       model = BillsItems
+       fields = ('description', 'qty', 'amount')
+

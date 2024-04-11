@@ -1,0 +1,29 @@
+{% extends "partials/layout.html" %}  
+
+
+{% block navbar %}
+{% include "partials/navbar.html" %}
+{% endblock navbar %}
+      
+    
+{% block sidebar %}
+{% include "partials/sidebar.html" %}
+{% endblock sidebar %}
+          
+              
+{% block content %}
+{% load crispy_forms_tags %}
+{% if request.user.is_superuser or request.user.is_employee %}
+<h1 class="m-2 text-mute text-center">Add Bill Item</h1>
+<div class="container">
+   <form action="" method="post">
+       {% csrf_token %}
+       {{form|crispy}}
+       <button class = "btn btn-info">Add Bill Item</button>
+   </form>
+</div>
+{% endif %}
+{% endblock content %} 
+{% block script %}
+{% include "partials/script.html" %}
+{% endblock script %}

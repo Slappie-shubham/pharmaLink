@@ -1,0 +1,37 @@
+{% extends "partials/layout.html" %}  
+
+
+{% block navbar %}
+{% include "partials/navbar.html" %}
+{% endblock navbar %}
+      
+    
+{% block sidebar %}
+{% include "partials/sidebar.html" %}
+{% endblock sidebar %}
+          
+              
+{% block content %}
+{% load crispy_forms_tags %}
+{% if request.user.is_superuser or request.user.is_employee %}
+<h1 class="m-2 text-mute text-center">Update Bill</h1>
+<div class="container">
+   <form action="" method="post">
+       {% csrf_token %}
+       {{form|crispy}}
+       <div class="row">
+           <button class = "btn btn-info">Update Bill</button>
+          
+           <a href="{% url "dashboard:generate_bill_items" bill_id=form.instance.id %}" class = "btn btn-info ml-2"> Add Bill Item</a>
+           <a href="{% url "dashboard:bill_item_list" bill_id=form.instance.id %}" class = "btn btn-info ml-2"> view Bill Item</a>
+       </div>
+   </form>
+</div>
+{% endif %}
+{% endblock content %} 
+{% block script %}
+{% include "partials/script.html" %}
+{% endblock script %}
+
+
+
